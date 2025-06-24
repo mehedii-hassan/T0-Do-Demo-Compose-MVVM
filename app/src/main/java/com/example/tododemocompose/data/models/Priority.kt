@@ -1,9 +1,7 @@
-package com.example.to_docompose.data.models
+package com.example.tododemocompose.data.models
 
 import androidx.compose.ui.graphics.Color
-import com.example.to_docompose.ui.theme.HighPriorityColor
-import com.example.to_docompose.ui.theme.LowPriorityColor
-import com.example.to_docompose.ui.theme.MediumPriorityColor
+import com.example.tododemocompose.ui.theme.*
 
 enum class Priority(val color: Color) {
     HIGH(HighPriorityColor),
