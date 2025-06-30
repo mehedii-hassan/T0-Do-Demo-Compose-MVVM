@@ -10,6 +10,8 @@ import com.example.tododemocompose.data.models.Priority
 import com.example.tododemocompose.data.models.ToDoTask
 import com.example.tododemocompose.data.repositories.ToDoRepository
 import com.example.tododemocompose.util.Action
+import com.example.tododemocompose.util.Constants.MAX_TITLE_LENGTH
+import com.example.tododemocompose.util.SearchAppBarState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,22 +54,22 @@ class SharedViewModel @Inject constructor(
                 updateAction(Action.NO_ACTION)
             }
 
-            /*    Action.UPDATE -> {
-                    updateTask()
-                }
+            Action.UPDATE -> {
+               // updateTask()
+            }
 
-                Action.DELETE -> {
-                    deleteTask()
-                }
+            Action.DELETE -> {
+               // deleteTask()
+            }
 
-                Action.DELETE_ALL -> {
-                    deleteAllTasks()
-                }
+            Action.DELETE_ALL -> {
+                //deleteAllTasks()
+            }
 
-                Action.UNDO -> {
-                    addTask()
-                    updateAction(Action.NO_ACTION)
-                }*/
+            Action.UNDO -> {
+                addTask()
+                updateAction(Action.NO_ACTION)
+            }
 
             else -> {
 
@@ -75,7 +77,33 @@ class SharedViewModel @Inject constructor(
         }
     }
 
+    fun updateTitle(newTitle: String) {
+        if (newTitle.length < MAX_TITLE_LENGTH) {
+            title = newTitle
+        }
+    }
+
+    fun updateDescription(newDescription: String) {
+        description = newDescription
+    }
+
+    fun updatePriority(newPriority: Priority) {
+        priority = newPriority
+    }
+
     fun updateAction(newAction: Action) {
         action = newAction
+    }
+
+    fun updateAppBarState(newState: SearchAppBarState) {
+      //  searchAppBarState = newState
+    }
+
+    fun updateSearchText(newText: String) {
+       // searchTextState = newText
+    }
+
+    fun validateFields(): Boolean {
+        return title.isNotEmpty() && description.isNotEmpty()
     }
 }
