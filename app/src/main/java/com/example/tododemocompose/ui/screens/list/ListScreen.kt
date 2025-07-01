@@ -1,4 +1,3 @@
-/*
 package com.example.tododemocompose.ui.screens.list
 
 import android.annotation.SuppressLint
@@ -13,13 +12,14 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import com.example.tododemocompose.R
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import com.example.to_docompose.ui.screens.list.ListContent
+import com.example.tododemocompose.R
 import com.example.tododemocompose.ui.viewmodels.SharedViewModel
 import com.example.tododemocompose.util.Action
+import com.example.tododemocompose.util.SearchAppBarState
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @ExperimentalAnimationApi
@@ -38,6 +38,7 @@ fun ListScreen(
     val sortState by sharedViewModel.sortState.collectAsState()
     val lowPriorityTasks by sharedViewModel.lowPriorityTasks.collectAsState()
     val highPriorityTasks by sharedViewModel.highPriorityTasks.collectAsState()
+
 
     val searchAppBarState: SearchAppBarState = sharedViewModel.searchAppBarState
     val searchTextState: String = sharedViewModel.searchTextState
@@ -62,7 +63,7 @@ fun ListScreen(
             )
         },
         content = { padding ->
-            ListContent(
+            ListContent (
                 modifier = Modifier.padding(
                     top = padding.calculateTopPadding(),
                     bottom = padding.calculateBottomPadding()
@@ -73,13 +74,11 @@ fun ListScreen(
                 highPriorityTasks = highPriorityTasks,
                 sortState = sortState,
                 searchAppBarState = searchAppBarState,
-                */
-/*onSwipeToDelete = { action, task ->
+                onSwipeToDelete = { action, task ->
                     sharedViewModel.updateAction(newAction = action)
-                    sharedViewModel.updateTaskFields(selectedTask = task)
+                    //sharedViewModel.updateTaskFields(selectedTask = task)
                     snackBarHostState.currentSnackbarData?.dismiss()
-                },*//*
-
+                },
                 navigateToTaskScreen = navigateToTaskScreen
             )
         },
@@ -88,7 +87,6 @@ fun ListScreen(
         }
     )
 }
-
 
 @Composable
 fun ListFab(
@@ -145,4 +143,4 @@ private fun setActionLabel(action: Action): String {
     } else {
         "OK"
     }
-}*/
+}

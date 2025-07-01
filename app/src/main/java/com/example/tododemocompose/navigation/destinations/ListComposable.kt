@@ -10,6 +10,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.example.tododemocompose.navigation.Screen
+import com.example.tododemocompose.ui.screens.list.ListScreen
 import com.example.tododemocompose.ui.viewmodels.SharedViewModel
 import com.example.tododemocompose.util.Action
 
@@ -31,11 +32,11 @@ fun NavGraphBuilder.listComposable(
 
         val databaseAction = sharedViewModel.action
 
-       /* ListScreen(
+        ListScreen(
             action = databaseAction,
             navigateToTaskScreen = navigateToTaskScreen,
             sharedViewModel = sharedViewModel
-        )*/
+        )
     }
 
 }
