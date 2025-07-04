@@ -23,7 +23,7 @@ fun SetupNavGraph(
         listComposable(
             navigateToTaskScreen = { taskId ->
                 navController.navigate(Screen.Task(id = taskId))
-                Log.d("tag","called task id $taskId")
+                Log.d("TAG","called task id $taskId")
             },
             sharedViewModel = sharedViewModel
         )
