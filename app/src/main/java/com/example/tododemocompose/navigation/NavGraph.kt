@@ -1,13 +1,13 @@
 package com.example.tododemocompose.navigation
 
-import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.tododemocompose.navigation.destinations.listComposable
+import com.example.tododemocompose.navigation.destinations.taskComposable
 import com.example.tododemocompose.ui.viewmodels.SharedViewModel
+import com.example.tododemocompose.util.logD
 
 @ExperimentalAnimationApi
 @Composable
@@ -16,14 +16,24 @@ fun SetupNavGraph(
     sharedViewModel: SharedViewModel
 ) {
     NavHost(
-        navController = navController,
+        navController,
         startDestination = Screen.List()
     ) {
 
         listComposable(
             navigateToTaskScreen = { taskId ->
-                navController.navigate(Screen.Task(id = taskId))
-                Log.d("TAG","called task id $taskId")
+                navController.navigate(Screen.Task(taskId))
+                logD("called task id $taskId")
+            },
+            sharedViewModel = sharedViewModel
+        )
+        taskComposable(
+            navigateToListScreen = { action ->
+                logD("successfully added, action name ${action.name}")
+
+                navController.navigate(Screen.List(action)) {
+                    popUpTo(Screen.List()) { inclusive = true }
+                }
             },
             sharedViewModel = sharedViewModel
         )

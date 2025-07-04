@@ -73,6 +73,17 @@ class SharedViewModel @Inject constructor(
         //searchAppBarState = SearchAppBarState.CLOSED
     }
 
+    private val _selectedTask: MutableStateFlow<ToDoTask?> = MutableStateFlow(null)
+    val selectedTask: StateFlow<ToDoTask?> = _selectedTask
+
+    fun getSelectedTask(taskId: Int) {
+        viewModelScope.launch {
+            repository.getSelectedTask(taskId = taskId).collect { task ->
+                _selectedTask.value = task
+            }
+        }
+    }
+
     val lowPriorityTasks: StateFlow<List<ToDoTask>> =
         repository.sortByLowPriority.stateIn(
             scope = viewModelScope,
@@ -101,6 +112,19 @@ class SharedViewModel @Inject constructor(
         }
     }
 
+    fun updateTaskFields(selectedTask: ToDoTask?) {
+        if (selectedTask != null) {
+            id = selectedTask.id
+            title = selectedTask.title
+            description = selectedTask.description
+            priority = selectedTask.priority
+        } else {
+            id = 0
+            title = ""
+            description = ""
+            priority = Priority.LOW
+        }
+    }
     fun handleDatabaseActions(action: Action) {
         when (action) {
             Action.ADD -> {
