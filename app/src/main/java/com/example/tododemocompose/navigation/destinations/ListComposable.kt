@@ -33,9 +33,9 @@ fun NavGraphBuilder.listComposable(
         val databaseAction = sharedViewModel.action
 
         ListScreen(
-            action = databaseAction,
-            navigateToTaskScreen = navigateToTaskScreen,
-            sharedViewModel = sharedViewModel
+            databaseAction,
+            navigateToTaskScreen,
+            sharedViewModel
         )
     }
 

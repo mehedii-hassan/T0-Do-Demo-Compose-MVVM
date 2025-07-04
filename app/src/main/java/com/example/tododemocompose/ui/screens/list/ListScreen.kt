@@ -56,14 +56,10 @@ fun ListScreen(
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
         topBar = {
-            ListAppBar(
-                sharedViewModel = sharedViewModel,
-                searchAppBarState = searchAppBarState,
-                searchTextState = searchTextState
-            )
+            ListAppBar(sharedViewModel, searchAppBarState, searchTextState)
         },
         content = { padding ->
-            ListContent (
+            ListContent(
                 modifier = Modifier.padding(
                     top = padding.calculateTopPadding(),
                     bottom = padding.calculateBottomPadding()
